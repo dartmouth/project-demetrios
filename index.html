@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Demetrios — Digital Philology for Ancient Greek</title>
+  <meta name="description" content="An open-source suite of computational tools for the phonological and rhetorical analysis of Ancient Greek verse, supported by Dartmouth College." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══════════════════════════════════════════════════════════ -->
+<nav class="site-nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo">
+    Project Demetrios
+    <span>Digital Classical Philology</span>
+  </a>
+  <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="tools.html" class="nav-cta">Launch Tools</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<header class="hero" role="banner">
+  <!-- Ghost manuscript inscription -->
+  <div class="hero-inscription" aria-hidden="true">
+    μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος οὐλομένην, ἣ μυρί᾽ Ἀχαιοῖς ἄλγε᾽ ἔθηκε
+  </div>
+
+  <!-- Geometric ornament -->
+  <div class="hero-ornament" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" stroke="rgba(201,168,76,0.25)" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="70" stroke="rgba(0,105,62,0.3)" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="50" stroke="rgba(201,168,76,0.2)" stroke-width="0.5"/>
+      <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+      <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+      <line x1="37" y1="37" x2="163" y2="163" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+      <line x1="163" y1="37" x2="37" y2="163" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+      <polygon points="100,18 182,60 182,140 100,182 18,140 18,60" stroke="rgba(0,105,62,0.2)" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        Supported by Dartmouth College
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-title-project">Project</span>
+        <span class="hero-title-name">Demetrios</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Open-source computational tools for the phonological<br>
+        and rhetorical analysis of <em>Ancient Greek verse.</em>
+      </p>
+
+      <div class="hero-actions">
+        <a href="tools.html" class="btn btn-primary btn-arrow">Explore the Tools</a>
+        <a href="about.html" class="btn btn-outline">About the Project</a>
+      </div>
+
+      <div class="hero-greek-label">
+        <span>Δημήτριος</span>
+        <span class="hero-greek-sub">Of Phaleron · fl. 325 BCE</span>
+      </div>
+    </div>
+
+    <div class="hero-stat-cluster" aria-label="Project highlights">
+      <div class="stat-card">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Analytical<br>Tools</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Lines<br>Processable</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Programming Skills<br>Required</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- ═══ MISSION STATEMENT ════════════════════════════════════════════════════ -->
+<section class="section mission-section">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-left reveal" data-delay="0">
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-heading">
+          Where <em>classical scholarship</em><br>
+          meets the digital age
+        </h2>
+        <div class="meander-rule"></div>
+        <p class="section-body">
+          Project Demetrios develops precision tools for the close reading
+          of Ancient Greek poetry. We believe that computational analysis
+          should serve the humanist by illuminating patterns invisible to
+          the naked eye while remaining fully transparent in its methods.
+        </p>
+        <p class="section-body" style="margin-top:1rem;">
+          Every tool runs entirely in the browser via Pyodide, requiring
+          no installation, no server, and no dependency on external APIs.
+          The result is portable, reproducible scholarship.
+        </p>
+        <a href="about.html" class="btn btn-dark btn-arrow" style="margin-top:2rem;">
+          Read the Project Statement
+        </a>
+      </div>
+
+      <div class="mission-right reveal" data-delay="150">
+        <blockquote class="pull-quote">
+          <div class="pq-greek">λόγων ἀκριβεία</div>
+          <div class="pq-translation">Precision in words</div>
+        </blockquote>
+
+        <div class="mission-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">φ</div>
+            <div class="pillar-text">
+              <h4>Philological Rigour</h4>
+              <p>All detection algorithms are grounded in the established
+              conventions of existing scholarship and are fully deterministic.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">ε</div>
+            <div class="pillar-text">
+              <h4>Epistemic Transparency</h4>
+              <p>Every normalisation step is opt-in and documented.
+              The scholar remains in control of the analysis.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">α</div>
+            <div class="pillar-text">
+              <h4>Open Access</h4>
+              <p>All source code is published on GitHub under an open
+              licence. Scholarship should be freely reproducible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOOLS SHOWCASE ═══════════════════════════════════════════════════════ -->
+<section class="section tools-section">
+  <div class="tools-bg-decoration" aria-hidden="true"></div>
+  <div class="container">
+    <div class="tools-header reveal">
+      <div class="section-label">The Toolkit</div>
+      <h2 class="section-heading" style="color: var(--snow-white);">
+        Instruments of<br><em>close reading</em>
+      </h2>
+      <p class="section-body" style="color: rgba(250,247,240,0.65);">
+        Each tool in the Project Demetrios suite targets a distinct
+        dimension of Greek poetic technique — from the phonological
+        texture of vowel sequences to the large-scale architecture of
+        rhetorical repetition.
+      </p>
+    </div>
+
+    <div class="tools-grid">
+
+      <!-- Tool 1: Hiatus Detector -->
+      <article class="tool-card reveal" data-delay="0">
+        <div class="tool-card-header">
+          <div class="tool-number">I</div>
+          <div class="tool-badge">Available</div>
+        </div>
+        <div class="tool-greek-letter" aria-hidden="true">Η</div>
+        <h3 class="tool-title">Hiatus<br>Detector</h3>
+        <p class="tool-desc">
+          Identifies instances of vowel hiatus across an uploaded Greek text, with
+          support for diphthongs handling, diaeresis, and more.
+        </p>
+        <div class="tool-features">
+          <span>Diphthong handling</span>
+          <span>Diaeresis detection</span>
+          <span>CSV / HTML export</span>
+        </div>
+        <a href="https://atanasgiliev.github.io/hiatus-detector/"
+           target="_blank" rel="noopener"
+           class="tool-link btn btn-outline">
+          Open Tool <span>↗</span>
+        </a>
+      </article>
+
+      <!-- Tool 2: Anaphora / Epiphora -->
+      <article class="tool-card tool-card--featured reveal" data-delay="120">
+        <div class="tool-card-header">
+          <div class="tool-number">II</div>
+          <div class="tool-badge tool-badge--new">Experimental</div>
+        </div>
+        <div class="tool-greek-letter" aria-hidden="true">Α</div>
+        <h3 class="tool-title">Anaphora &amp;<br>Epiphora Detector</h3>
+        <p class="tool-desc">
+          Detects rhetorical repetition at verse-line boundaries and
+          across clause-delimiting punctuation, with configurable
+          phrase length, distance windows, and stop-word transparency.
+        </p>
+        <div class="tool-features">
+          <span>Anaphora</span>
+          <span>Epiphora</span>
+          <span>Word repetition</span>
+          <span>Elision handling</span>
+        </div>
+        <a href="tools.html" class="tool-link btn btn-primary">
+          Open Tool <span>→</span>
+        </a>
+      </article>
+
+      <!-- Tool 3: Coming soon -->
+      <article class="tool-card tool-card--soon reveal" data-delay="240">
+        <div class="tool-card-header">
+          <div class="tool-number">III</div>
+          <div class="tool-badge tool-badge--soon">In Development</div>
+        </div>
+        <div class="tool-greek-letter" aria-hidden="true">Χ</div>
+        <h3 class="tool-title">Further<br>Figures</h3>
+        <p class="tool-desc">
+          Future modules will address chiasmus, polyptoton, asyndeton,
+          and other figures catalogued in the ancient rhetorical handbooks
+          of Demetrios, Hermogenes, and Pseudo-Longinus.
+        </p>
+        <div class="tool-features">
+          <span>Chiasmus</span>
+          <span>Polyptoton</span>
+          <span>Coming Soon</span>
+        </div>
+        <span class="tool-link btn btn-outline" style="opacity:0.4;cursor:not-allowed;">
+          Coming Soon
+        </span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INSTITUTIONS ══════════════════════════════════════════════════════════ -->
+<section class="section institutions-section">
+  <div class="container">
+    <div class="institutions-inner reveal">
+      <div class="section-label">Institutional Support</div>
+      <p class="institutions-statement">
+        Project Demetrios is developed with the support of<br>
+        <strong>Dartmouth College</strong>.
+      </p>
+      <div class="institution-logos">
+        <div class="institution-logo">
+          <div class="inst-color-block" style="background: var(--dartmouth-green);"></div>
+          <div class="inst-text">
+            <div class="inst-name">Dartmouth College</div>
+            <div class="inst-dept">Department of Classics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name">Project Demetrios</div>
+      <p>Open-source computational tools for the analysis of Ancient Greek verse named for Demetrius of Phaleron.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="https://atanasgiliev.github.io/hiatus-detector/" target="_blank">Hiatus Detector</a></li>
+        <li><a href="tools.html">Anaphora &amp; Epiphora</a></li>
+        <li><a href="tools.html">All Tools</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Project</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#team">Team</a></li>
+        <li><a href="about.html#grants">Grants</a></li>
+        <li><a href="https://github.com/atanasgiliev" target="_blank">GitHub ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Project Demetrios · Dartmouth College</span>
+    <span class="greek-motto">Vox clamantis in deserto</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
