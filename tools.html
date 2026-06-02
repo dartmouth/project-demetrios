@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools — Project Demetrios</title>
+  <meta name="description" content="The Project Demetrios analytical toolkit: open-source tools for hiatus detection, anaphora and epiphora analysis, and more." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tools.css" />
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════════════════ -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">
+    Project Demetrios
+    <span>Digital Classical Philology</span>
+  </a>
+  <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="tools.html" class="nav-cta">Launch Tools</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
+<header class="page-hero">
+  <div class="page-hero-ghost" aria-hidden="true">Ὄργανα</div>
+  <div class="page-hero-inner">
+    <div class="eyebrow">The Toolkit</div>
+    <h1>Instruments of<br><em>close reading</em></h1>
+    <p class="lead">
+      Each tool in the Project Demetrios suite addresses a distinct dimension
+      of Greek poetic craft, running entirely in the browser with no installation required.
+    </p>
+  </div>
+</header>
+
+<!-- ═══ TOOLS LIST ════════════════════════════════════════════════════════════ -->
+<main class="tools-page-main">
+  <div class="container">
+
+    <!-- Tool I: Hiatus Detector -->
+    <article class="tool-detail reveal" id="hiatus">
+      <div class="tool-detail-number">I</div>
+
+      <div class="tool-detail-content">
+        <div class="tool-detail-header">
+          <div class="tool-detail-status available">
+            <span class="status-dot"></span> Available
+          </div>
+          <a href="https://atanasgiliev.github.io/hiatus-detector/"
+             target="_blank" rel="noopener"
+             class="btn btn-primary">
+            Launch Tool ↗
+          </a>
+        </div>
+
+        <h2 class="tool-detail-title">Hiatus Detector</h2>
+        <div class="tool-detail-greek" aria-hidden="true">Χασμῳδία</div>
+
+        <p class="tool-detail-lead">
+          Identifies and categorizes every instance of three types of vowel hiatus across
+          an uploaded Ancient Greek text file.
+        </p>
+
+        <div class="meander-rule" style="margin: 1.5rem 0;"></div>
+
+        <div class="tool-detail-body">
+          <div class="tool-detail-desc">
+            <h4>What it does</h4>
+            <p>
+              Hiatus is one of the most studied phenomena in Greek verse euphony.
+              Ancient metricians distinguished between permissible hiatus and infelicitous sequences that poets typically avoided through
+              elision, crasis, or rearrangement. Detecting and tabulating hiatus across
+              a long poem or corpus is a laborious task by hand; this tool automates it.
+            </p>
+            <p>
+              The detector handles Unicode Greek text with full polytonic diacritics,
+              correctly distinguishing true diphthongs from vowel sequences resolved into two syllables by diaeresis (ἀΐδηλος),
+              and a variety of other edge cases and scenarios.
+            </p>
+
+            <h4>How to use it</h4>
+            <ol>
+              <li>Upload a UTF-8 encoded <code>.txt</code> file of Greek text.</li>
+              <li>Select the hiatus types to detect (standard, at verse-end, etc.).</li>
+              <li>Click <em>Run Detector</em>.</li>
+              <li>Download the annotated HTML output and/or the CSV occurrence table.</li>
+            </ol>
+          </div>
+
+          <div class="tool-detail-specs">
+            <div class="spec-block">
+              <div class="spec-label">Technology</div>
+              <div class="spec-value">Python 3 via Pyodide<br>(fully browser-based)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Input</div>
+              <div class="spec-value">UTF-8 .txt or paste</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Output</div>
+              <div class="spec-value">Annotated HTML<br>CSV occurrence table</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Source</div>
+              <div class="spec-value">
+                <a href="https://github.com/atanasgiliev/hiatus-detector"
+                   target="_blank" rel="noopener"
+                   style="color:var(--dartmouth-green);">
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-feature-tags">
+          <span>Diphthong handling</span>
+          <span>Diaeresis detection</span>
+          <span>Interword hiatus</span>
+          <span>Intraword hiatus</span>
+          <span>Verse-end hiatus</span>
+          <span>CSV export</span>
+          <span>HTML export</span>
+          <span>No installation</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="tool-divider" aria-hidden="true">
+      <div class="meander-rule gold"></div>
+    </div>
+
+    <!-- Tool II: Anaphora / Epiphora -->
+    <article class="tool-detail reveal" id="anaphora">
+      <div class="tool-detail-number">II</div>
+
+      <div class="tool-detail-content">
+        <div class="tool-detail-header">
+          <div class="tool-detail-status available">
+            <span class="status-dot"></span> Experimental — New
+          </div>
+          <a href="https://atanasgiliev.github.io/anaphora-detector/"
+             target="_blank" rel="noopener"
+             class="btn btn-primary">
+            Launch Tool →
+          </a>
+        </div>
+
+        <h2 class="tool-detail-title">Anaphora &amp; Epiphora Detector</h2>
+        <div class="tool-detail-greek" aria-hidden="true">Ἀναφορά</div>
+
+        <p class="tool-detail-lead">
+          Detects and highlights rhetorical repetition (anaphora, epiphora, and
+          word repetition across clause boundaries) in Ancient Greek verse, with
+          fully configurable phrase length, distance windows, and normalisation options.
+        </p>
+
+        <div class="meander-rule" style="margin: 1.5rem 0;"></div>
+
+        <div class="tool-detail-body">
+          <div class="tool-detail-desc">
+            <h4>What it does</h4>
+            <p>
+              <strong>Anaphora</strong>, the repetition of the same word or phrase at
+              the beginning of successive verse lines, and <strong>epiphora</strong>
+              (antistrophe), repetition at line-ends, are among the most powerful
+              structural devices in Greek poetry, extensively discussed by ancient
+              rhetorical theorists from Gorgias onward. This tool makes their
+              systematic identification possible across extended texts.
+            </p>
+            <p>
+              A third mode, <strong>word repetition</strong>, detects phrase-initial
+              repetition across clause boundaries delimited by punctuation (. · ; ,),
+              capturing figures that
+              recur across periods within and between lines.
+            </p>
+            <p>
+              Stop-words (particles, articles, prepositions) are handled with
+              philological care: they are "transparent" — skipped when determining
+              the comparison phrase, but noted in the output table, so the scholar
+              can see exactly what was elided from the matching logic. All
+              normalisation steps (accent stripping, breathing removal, iota
+              subscript, elision, nu-movable) are individually toggleable.
+            </p>
+
+            <h4>Detection modes</h4>
+            <div class="detection-modes">
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(212,160,23,0.7);"></div>
+                <div>
+                  <strong>Anaphora</strong> — Gold highlight<br>
+                  <small>Repetition at the start of consecutive verse lines</small>
+                </div>
+              </div>
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(30,160,160,0.7);"></div>
+                <div>
+                  <strong>Epiphora</strong> — Teal highlight<br>
+                  <small>Repetition at the end of consecutive verse lines</small>
+                </div>
+              </div>
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(160,60,180,0.7);"></div>
+                <div>
+                  <strong>Word Repetition</strong> — Violet highlight<br>
+                  <small>Clause-initial repetition across punctuation boundaries</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-detail-specs">
+            <div class="spec-block">
+              <div class="spec-label">Technology</div>
+              <div class="spec-value">Python 3 via Pyodide<br>(fully browser-based)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Input</div>
+              <div class="spec-value">UTF-8 .txt or paste</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Phrase length</div>
+              <div class="spec-value">1–5 words (user-set)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Distance window</div>
+              <div class="spec-value">2–10 lines (user-set)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Output</div>
+              <div class="spec-value">Annotated HTML<br>CSV occurrence table</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-feature-tags">
+          <span>Anaphora</span>
+          <span>Epiphora</span>
+          <span>Word repetition</span>
+          <span>Stop-word transparency</span>
+          <span>Elision handling</span>
+          <span>Nu-movable</span>
+          <span>Configurable window</span>
+          <span>CSV export</span>
+          <span>HTML export</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="tool-divider" aria-hidden="true">
+      <div class="meander-rule gold"></div>
+    </div>
+
+    <!-- Tool III: Coming soon -->
+    <article class="tool-detail tool-detail--soon reveal" id="coming-soon">
+      <div class="tool-detail-number" style="opacity:0.35;">III</div>
+
+      <div class="tool-detail-content">
+        <div class="tool-detail-header">
+          <div class="tool-detail-status soon">
+            <span class="status-dot"></span> In Development
+          </div>
+        </div>
+
+        <h2 class="tool-detail-title" style="opacity:0.5;">Further Rhetorical Figures</h2>
+        <div class="tool-detail-greek" style="opacity:0.08;" aria-hidden="true">Χίασμος</div>
+
+        <p class="tool-detail-lead" style="opacity:0.5;">
+          Future modules will address chiasmus, polyptoton, asyndeton, and other
+          figures catalogued in the ancient rhetorical handbooks of Demetrius,
+          Hermogenes, and Pseudo-Longinus.
+        </p>
+
+        <div class="tool-feature-tags" style="opacity:0.4;">
+          <span>Chiasmus</span>
+          <span>Polyptoton</span>
+          <span>Asyndeton</span>
+          <span>Homoioteleuton</span>
+          <span>In Development</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<!-- ═══ HOW IT WORKS ══════════════════════════════════════════════════════════ -->
+<section class="section how-section">
+  <div class="container">
+    <div class="how-grid">
+      <div class="how-text reveal">
+        <div class="section-label">Technical Architecture</div>
+        <h2 class="section-heading">
+          Scholarship without<br><em>infrastructure</em>
+        </h2>
+        <div class="meander-rule"></div>
+        <p class="section-body">
+          Every Project Demetrios tool runs entirely in the browser using
+          <a href="https://pyodide.org" target="_blank" rel="noopener"
+             style="color:var(--dartmouth-green);">Pyodide</a>,
+          a WebAssembly port of CPython. This means the full power of Python's
+          <code>unicodedata</code> module is available for precise polytonic
+          Greek handling, with no server, no API key, and no data ever
+          leaving your machine.
+        </p>
+        <p class="section-body" style="margin-top:1rem;">
+          Outputs are always download-ready: annotated HTML for publication
+          or presentation, and CSV for statistical analysis in R, Python,
+          or a spreadsheet.
+        </p>
+      </div>
+
+      <div class="how-steps reveal" data-delay="150">
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Upload or Paste</h4>
+            <p>Load any UTF-8 encoded Greek text — a single ode, a full epic, a papyrus fragment.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Configure</h4>
+            <p>Set detection options: phrase length, distance window, normalisation, stop-word handling.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Analyse</h4>
+            <p>Python runs locally in your browser via Pyodide. No data leaves your device.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Export</h4>
+            <p>Download an annotated HTML file or a CSV occurrence table for further analysis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name">Project Demetrios</div>
+      <p>Open-source computational tools for the analysis of Ancient Greek verse named for Demetrius of Phaleron.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="https://atanasgiliev.github.io/hiatus-detector/" target="_blank">Hiatus Detector</a></li>
+        <li><a href="tools.html#anaphora">Anaphora &amp; Epiphora</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Project</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#team">Team</a></li>
+        <li><a href="about.html#grants">Grants</a></li>
+        <li><a href="https://github.com/atanasgiliev" target="_blank">GitHub ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Project Demetrios · Dartmouth College</span>
+    <span class="greek-motto">Vox clamantis in deserto</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
