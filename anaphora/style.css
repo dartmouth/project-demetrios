@@ -1,0 +1,651 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Project Demetrios — Anaphora & Epiphora Detector
+   Stylesheet v2 · Neo-classical editorial · Dartmouth palette
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;500;600&display=swap');
+
+/* ── Dartmouth palette tokens ───────────────────────────────────────────── */
+:root {
+  --green-deep:    #0d1e1c;
+  --green-forest:  #12312b;
+  --green-dart:    #00693e;
+  --green-spring:  #c4dd88;
+  --gold:          #c9a84c;
+  --parchment:     #faf7f0;
+  --parchment-d:   #f0ead8;
+  --ink:           #1a1611;
+  --granite:       #424141;
+  --muted:         #707070;
+  --border:        #ddd;
+  --white:         #ffffff;
+
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-caps:     'Cinzel', 'Trajan Pro', serif;
+
+  /* Highlight colours — must stay in sync with detector.py */
+  --ana-bg:        rgba(212, 160, 23, 0.32);
+  --ana-line:      #b8860b;
+  --epi-bg:        rgba(30, 160, 160, 0.30);
+  --epi-line:      #1a8a8a;
+  --wr-bg:         rgba(160, 60, 180, 0.22);
+  --wr-line:       #8a30a8;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--parchment);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--parchment); }
+::-webkit-scrollbar-thumb { background: var(--green-dart); border-radius: 3px; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LAYOUT
+   ════════════════════════════════════════════════════════════════════════════ */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   HEADER  — dark hero band
+   ════════════════════════════════════════════════════════════════════════════ */
+header {
+  background: var(--green-deep);
+  padding: 3rem 3rem 2.5rem;
+  border-bottom: none;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 80% at 70% 50%, rgba(0,105,62,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 60% at 10% 80%, rgba(38,122,186,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Ghost Greek letter */
+header::after {
+  content: 'Α';
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 14rem;
+  font-weight: 700;
+  color: rgba(196, 221, 136, 0.042);
+  line-height: 1;
+  pointer-events: none;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.5vw, 2.7rem);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.subtitle {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: rgba(250, 247, 240, 0.55);
+  font-style: italic;
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Project eyebrow — inject via a <p class="eyebrow"> or reuse .subtitle */
+.eyebrow-tag {
+  font-family: var(--font-caps);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(196, 221, 136, 0.62);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow-tag::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--green-dart);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BODY CONTENT AREA
+   ════════════════════════════════════════════════════════════════════════════ */
+.body-content {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 2.25rem 3rem 3rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MEANDER ORNAMENT
+   ════════════════════════════════════════════════════════════════════════════ */
+.meander-rule {
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12'%3E%3Cpath d='M0 10 h4 v-4 h4 v4 h4 v-8 h-4 v4 h-4 v-4 h4 v-4 h8 v4 h-4 v4 h4 v4 h4' fill='none' stroke='%2300693e' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.3;
+  margin: 1.25rem 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   HELP BOX
+   ════════════════════════════════════════════════════════════════════════════ */
+.help-box {
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.help-box summary {
+  font-family: var(--font-caps);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  cursor: pointer;
+  user-select: none;
+}
+
+.help-content {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--granite);
+  line-height: 1.72;
+}
+
+.help-content h3 {
+  font-family: var(--font-caps);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-forest);
+  margin: 1rem 0 0.35rem;
+}
+
+.help-content h3:first-child { margin-top: 0; }
+
+.help-content dt {
+  font-weight: normal;
+  color: var(--green-forest);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.help-content dd {
+  margin-left: 1.2rem;
+  color: var(--muted);
+}
+
+.help-content ol,
+.help-content ul { padding-left: 1.3rem; }
+.help-content li { margin-bottom: 0.2rem; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PANELS
+   ════════════════════════════════════════════════════════════════════════════ */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.1rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   FILE INPUT & PASTE
+   ════════════════════════════════════════════════════════════════════════════ */
+.file-label {
+  display: block;
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  margin-bottom: 0.55rem;
+  font-weight: normal;
+}
+
+input[type="file"] {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--granite);
+  display: block;
+}
+
+textarea#pasteArea {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  resize: vertical;
+  background: var(--parchment);
+  color: var(--ink);
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+
+textarea#pasteArea:focus {
+  outline: none;
+  border-color: var(--green-dart);
+  box-shadow: 0 0 0 2px rgba(0, 105, 62, 0.12);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   OPTIONS FIELDSETS
+   ════════════════════════════════════════════════════════════════════════════ */
+.options fieldset {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.85rem 1.1rem 0.95rem;
+  margin-bottom: 0.85rem;
+  background: var(--white);
+}
+
+.options fieldset:last-child { margin-bottom: 0; }
+
+.options legend {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  padding: 0 0.35rem;
+  font-weight: normal;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--granite);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  line-height: 1.45;
+}
+
+.option:last-of-type { margin-bottom: 0; }
+
+.option input[type="checkbox"] {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  accent-color: var(--green-dart);
+}
+
+/* Slider rows */
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.slider-row span:first-child {
+  min-width: 230px;
+  font-size: 0.92rem;
+  color: var(--granite);
+}
+
+input[type="range"] {
+  flex: 1;
+  min-width: 100px;
+  accent-color: var(--green-dart);
+}
+
+.slider-val {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-family: var(--font-caps);
+  font-size: 0.78rem;
+  color: var(--green-dart);
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.45rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ACTIONS — run button
+   ════════════════════════════════════════════════════════════════════════════ */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+button {
+  background: var(--green-dart);
+  color: var(--white);
+  border: none;
+  border-radius: 0;
+  padding: 0.65rem 1.6rem;
+  font-family: var(--font-caps);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--green-forest);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 105, 62, 0.28);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Download buttons get a dark-forest treatment */
+#downloadHtmlBtn,
+#downloadCsvBtn {
+  background: var(--green-forest);
+  color: var(--green-spring);
+}
+
+#downloadHtmlBtn:hover:not(:disabled),
+#downloadCsvBtn:hover:not(:disabled) {
+  background: var(--green-deep);
+  box-shadow: 0 4px 16px rgba(13, 30, 28, 0.3);
+}
+
+.status {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.status.error {
+  color: #9d162e;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LEGEND
+   ════════════════════════════════════════════════════════════════════════════ */
+.legend {
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+}
+
+.legend h2 {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  margin-bottom: 0.7rem;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.75rem;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  color: var(--granite);
+}
+
+.legend-box {
+  display: inline-block;
+  width: 18px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.legend-box.anaphora {
+  background: var(--ana-bg);
+  border-bottom: 2px solid var(--ana-line);
+}
+
+.legend-box.epiphora {
+  background: var(--epi-bg);
+  border-bottom: 2px solid var(--epi-line);
+}
+
+.legend-box.wordrepeat {
+  background: var(--wr-bg);
+  border-bottom: 2px solid var(--wr-line);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   OUTPUT
+   ════════════════════════════════════════════════════════════════════════════ */
+.output h2 {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  margin-bottom: 0.7rem;
+}
+
+.downloads {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.download-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.output-section {
+  margin-bottom: 1.75rem;
+}
+
+.output-section h3 {
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35rem;
+}
+
+/* ── Annotated text pre ─────────────────────────────────────────────────── */
+pre.source {
+  white-space: pre-wrap;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.78;
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+}
+
+/* ── Highlights ─────────────────────────────────────────────────────────── */
+.rep-anaphora {
+  background: var(--ana-bg);
+  border-bottom: 2px solid var(--ana-line);
+}
+
+.rep-epiphora {
+  background: var(--epi-bg);
+  border-bottom: 2px solid var(--epi-line);
+}
+
+.rep-wordrepeat {
+  background: var(--wr-bg);
+  border-bottom: 2px solid var(--wr-line);
+}
+
+/* ── Occurrence table ───────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  font-family: var(--font-display);
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--parchment-d);
+  font-family: var(--font-caps);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+  font-weight: normal;
+}
+
+tr:nth-child(even) td { background: var(--parchment); }
+tr:hover td { background: rgba(0, 105, 62, 0.04); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════════════════════════════════════ */
+footer {
+  background: var(--green-deep);
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  margin-top: 0;
+  padding: 1.5rem 3rem;
+  font-size: 0.82rem;
+  color: rgba(250, 247, 240, 0.42);
+  text-align: center;
+  font-style: italic;
+}
+
+footer strong {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-spring);
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  header { padding: 2rem 1.5rem 1.75rem; }
+  header::after { font-size: 7rem; }
+  .body-content { padding: 1.5rem 1.5rem 2rem; }
+  footer { padding: 1.25rem 1.5rem; }
+  header h1 { font-size: 1.55rem; }
+  .slider-row span:first-child { min-width: 0; width: 100%; }
+  pre.source { font-size: 0.97rem; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BACK-TO-SITE NAV  (links back to projectdemetrios.dartmouth.edu)
+   ════════════════════════════════════════════════════════════════════════════ */
+.tool-site-nav {
+  background: var(--green-deep);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 44px;
+}
+
+.tool-site-nav-logo {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-spring);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.tool-site-nav-logo:hover { opacity: 0.75; }
+
+.tool-site-nav-links {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.tool-site-nav-links a {
+  font-family: var(--font-caps);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.5);
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  transition: color 0.2s;
+}
+
+.tool-site-nav-links a:hover { color: var(--green-spring); }
+
+@media (max-width: 500px) {
+  .tool-site-nav { padding: 0 1.25rem; }
+  .tool-site-nav-links { display: none; }
+}
