@@ -1,0 +1,426 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROJECT DEMETRIOS — Contact Page CSS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MAIN LAYOUT
+   ════════════════════════════════════════════════════════════════════════════ */
+.contact-main {
+  background: var(--parchment);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   FORM
+   ════════════════════════════════════════════════════════════════════════════ */
+.contact-form-wrap {
+  min-width: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Row with two inputs side by side */
+.form-row--two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Labels */
+.form-label {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dart);
+}
+
+.required {
+  color: #9d162e;
+  margin-left: 0.1em;
+}
+
+/* Text inputs */
+.form-input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.65rem 0.85rem;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--green-dart);
+  box-shadow: 0 0 0 3px rgba(0, 105, 62, 0.1);
+}
+
+.form-input::placeholder {
+  color: rgba(112, 112, 112, 0.5);
+  font-style: italic;
+}
+
+/* Select */
+.select-wrap {
+  position: relative;
+}
+
+.form-select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.65rem 2.5rem 0.65rem 0.85rem;
+  width: 100%;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--green-dart);
+  box-shadow: 0 0 0 3px rgba(0, 105, 62, 0.1);
+}
+
+/* Custom arrow */
+.select-arrow {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: var(--green-dart);
+  pointer-events: none;
+  font-family: var(--font-caps);
+}
+
+/* Textarea */
+.form-textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.65rem 0.85rem;
+  width: 100%;
+  resize: vertical;
+  min-height: 160px;
+  line-height: 1.7;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--green-dart);
+  box-shadow: 0 0 0 3px rgba(0, 105, 62, 0.1);
+}
+
+.form-textarea::placeholder {
+  color: rgba(112, 112, 112, 0.5);
+  font-style: italic;
+}
+
+/* Form footer row */
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.form-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Submit button */
+.form-submit {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+}
+
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-arrow {
+  transition: transform 0.2s;
+}
+
+.form-submit:hover:not(:disabled) .submit-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Success state ──────────────────────────────────────────────────────── */
+.form-success {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green-dart);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.success-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--green-dart);
+  color: var(--white);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+}
+
+.form-success h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--forest-green);
+  margin-bottom: 0.75rem;
+}
+
+.form-success p {
+  font-size: 1rem;
+  color: var(--granite);
+  line-height: 1.75;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ASIDE
+   ════════════════════════════════════════════════════════════════════════════ */
+.contact-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+}
+
+.contact-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Email card */
+.contact-email-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--forest-green);
+  padding: 1.25rem 1.5rem;
+}
+
+.email-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--green-dart);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--white);
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.email-label {
+  font-family: var(--font-caps);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(196, 221, 136, 0.6);
+  margin-bottom: 0.25rem;
+}
+
+.email-address {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--green-spring);
+  text-decoration: none;
+  word-break: break-all;
+  transition: opacity 0.2s;
+}
+
+.email-address:hover { opacity: 0.75; }
+
+/* Institution entries */
+.contact-institution {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1rem 1.1rem;
+}
+
+.inst-bar {
+  width: 3px;
+  height: 100%;
+  min-height: 36px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.inst-name {
+  font-family: var(--font-caps);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--forest-green);
+  margin-bottom: 0.2rem;
+}
+
+.inst-detail {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* GitHub link */
+.contact-github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.contact-github-link:hover {
+  border-color: var(--green-dart);
+  background: rgba(0, 105, 62, 0.04);
+}
+
+.github-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--parchment-d);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--granite);
+}
+
+.github-label {
+  font-family: var(--font-caps);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--forest-green);
+  margin-bottom: 0.15rem;
+}
+
+.github-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.github-arrow {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--green-dart);
+}
+
+.contact-aside-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Aside quote */
+.contact-quote {
+  border-left: 2px solid rgba(0, 105, 62, 0.3);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.cq-greek {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--forest-green);
+  margin-bottom: 0.25rem;
+}
+
+.cq-trans {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-aside {
+    position: static;
+    /* Reorder: show aside info above the form on mobile */
+  }
+}
+
+@media (max-width: 600px) {
+  .form-row--two {
+    grid-template-columns: 1fr;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
