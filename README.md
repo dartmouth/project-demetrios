@@ -150,7 +150,7 @@ If you find an error in the detection logic — a false positive, a missed insta
 
 ## Acknowledgements
 
-Project Demetrios is supported by the **Neukom Institute, Dartmouth College**. Development was carried out by [Atanas G. Iliev](https://github.com/atanasgiliev) with support from the project team.
+Project Demetrios is supported by the **Neukom Institute for Computational Science, Dartmouth College**. Development was carried out by [Atanas G. Iliev](https://github.com/atanasgiliev) with support from the project team.
 
 The detection tools make use of [Pyodide](https://pyodide.org), an open-source project maintained by the Pyodide contributors.
 
