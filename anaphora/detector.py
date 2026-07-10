@@ -69,7 +69,9 @@ _APOSTROPHES = {
     "\u02bc",  # MODIFIER LETTER APOSTROPHE    ʼ
     "\u02b9",  # MODIFIER LETTER PRIME         ʹ
     "\u1fbd",  # GREEK KORONIS                 ᾽
+    "\u1fbf",  # GREEK PSILI                   ᾿  (cat=Sk; was missing)
     "\u02bb",  # MODIFIER LETTER TURNED COMMA  ʻ
+    "\u2018",  # LEFT SINGLE QUOTATION MARK    '
 }
 
 # Short vowels elided in Greek; used for elision-stem normalisation (step 8).
@@ -138,6 +140,17 @@ def normalize_word(word: str, opts: dict) -> str:
 
     # ── Step 6: NFC ──────────────────────────────────────────────────────────
     w = unicodedata.normalize("NFC", w)
+
+    # ── Step 6.5: catch-all elision mark removal ─────────────────────────────
+    # After NFC, any word-final character whose Unicode category is not a
+    # letter (Ll/Lu/Lo) or combining mark (Mn/Mc) is almost certainly an
+    # elision mark that slipped past step 1 (e.g. U+1FBF GREEK PSILI has
+    # category Sk and is not in _APOSTROPHES by default).
+    # This makes elision detection robust against any apostrophe codepoint.
+    if opts.get("handle_elision", False) and not had_apostrophe:
+        if w and unicodedata.category(w[-1]) not in {"Ll", "Lu", "Lo", "Mn", "Mc"}:
+            w = w[:-1]
+            had_apostrophe = True
 
     # ── Step 7: nu-movable ───────────────────────────────────────────────────
     # FIX: the penultimate character is checked accent-insensitively by
