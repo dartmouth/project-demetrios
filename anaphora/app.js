@@ -24,6 +24,7 @@ const dlCsvBtn           = document.getElementById("downloadCsvBtn");
 const optAna             = document.getElementById("optAnaphora");
 const optEpi             = document.getElementById("optEpiphora");
 const optWR              = document.getElementById("optWordRepetition");
+const optAnad            = document.getElementById("optAnadiplosis");
 const optPhraseLen       = document.getElementById("optPhraseLen");
 const optPhraseLenVal    = document.getElementById("optPhraseLenVal");
 const optWindow          = document.getElementById("optWindow");
@@ -104,7 +105,7 @@ runBtn.addEventListener("click", async () => {
     if (!textContent || !pyLoaded) return;
 
     // Validate: at least one type checked
-    if (!optAna.checked && !optEpi.checked && !optWR.checked) {
+    if (!optAna.checked && !optEpi.checked && !optWR.checked && !optAnad.checked) {
         setStatus("Please select at least one detection type.", true);
         return;
     }
@@ -124,6 +125,7 @@ runBtn.addEventListener("click", async () => {
         detect_anaphora:         optAna.checked,
         detect_epiphora:         optEpi.checked,
         detect_word_repetition:  optWR.checked,
+        detect_anadiplosis:      optAnad.checked,
         phrase_length:           parseInt(optPhraseLen.value),
         distance_window:         parseInt(optWindow.value),
         min_occurrences:         parseInt(optMinOcc.value),
