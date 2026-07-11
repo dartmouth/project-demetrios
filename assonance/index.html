@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Assonance &amp; Consonance Detector — Project Demetrios</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#12312b">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="tool-site-nav">
+  <a href="/" class="tool-site-nav-logo">← Project Demetrios</a>
+  <div class="tool-site-nav-links">
+    <a href="/tools.html">All Tools</a>
+    <a href="/about.html">About</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <header>
+    <p class="eyebrow-tag">Project Demetrios · Tool III</p>
+    <h1>Greek Assonance &amp; Consonance Detector</h1>
+    <p class="subtitle">
+      An analytical tool for identifying repeated vowel and consonant sounds
+      across nearby words in Ancient Greek texts
+    </p>
+  </header>
+
+  <div class="body-content">
+
+  <!-- Help -->
+  <details class="help-box">
+    <summary><strong>Help &amp; Usage</strong></summary>
+    <div class="help-content">
+      <h3>How to use the detector</h3>
+      <ol>
+        <li>Upload or paste a UTF-8 Greek text.</li>
+        <li>Configure the detection options below.</li>
+        <li>Click <em>Run Detector</em>.</li>
+        <li>Results appear below with an annotated text and an occurrence table.</li>
+      </ol>
+
+      <h3>Definitions</h3>
+      <dl>
+        <dt>Assonance</dt>
+        <dd>Repetition of a <em>vowel</em> sound — a single vowel or a diphthong —
+            anywhere within nearby words (not restricted to word-initial position).
+            Example: <em>πολλὰ παθὼν καὶ πολλὰ πλανηθεὶς</em> repeats the vowel
+            α across four words.</dd>
+        <dt>Consonance</dt>
+        <dd>Repetition of a <em>consonant</em> sound anywhere within nearby words,
+            in any position. Example: the λ sound scattered through
+            <em>θάλασσα… γαλήνη… λάμπε… σελήνη… λαμπρῶς</em>.</dd>
+        <dt>Alliteration</dt>
+        <dd>The strict classical form of consonance: only the word-<em>initial</em>
+            consonant counts. Enable the "Restrict to alliteration" sub-option under
+            Consonance to switch to this mode. Vowel-initial words do not
+            participate in alliteration — their vowel-initial sound is instead
+            covered by Assonance.</dd>
+      </dl>
+
+      <h3>Window size</h3>
+      <p>
+        How many consecutive words are examined together. A window of 4 means
+        the tool looks at any run of up to 4 consecutive (content) words to see
+        whether a sound repeats enough times within that span.
+      </p>
+
+      <h3>Minimum occurrences</h3>
+      <p>
+        How many words within the window must share a sound before it is
+        reported. A higher threshold surfaces only the most emphatic sound
+        patterns; a lower threshold catches subtler repetition.
+      </p>
+
+      <h3>Ignore vowel quantity</h3>
+      <p>
+        When enabled, ω is treated as the same sound as ο, and η as the same
+        sound as ε, for the purposes of assonance matching. These are the only
+        two vowel pairs with distinct short/long <em>letterforms</em> in the
+        Greek script — α, ι, and υ have no separate long/short letters, so
+        there is nothing to merge there.
+      </p>
+
+      <h3>Stop-word exclusion</h3>
+      <p>
+        When enabled, common particles, articles, and prepositions (καί, δέ,
+        ὁ, ἡ, γάρ, μέν, ἐν, …) are removed from consideration entirely before
+        the window is applied — they can neither trigger a match nor break
+        the span of consecutive content words being examined.
+      </p>
+    </div>
+  </details>
+
+  <!-- Input -->
+  <section class="panel">
+    <label class="file-label">Upload a UTF-8 encoded Greek text file</label>
+    <input type="file" id="fileInput" accept=".txt">
+    <p class="note" style="margin-top:0.5rem;">
+      — or paste Greek text directly —
+    </p>
+    <textarea id="pasteArea" rows="8"
+              placeholder="Paste Ancient Greek verse here…"
+              spellcheck="false"></textarea>
+  </section>
+
+  <!-- Options -->
+  <section class="panel options">
+
+    <fieldset>
+      <legend>Figures to Detect</legend>
+      <label class="option">
+        <input type="checkbox" id="optAssonance" checked>
+        Assonance (repeated vowel sounds)
+      </label>
+      <label class="option" style="margin-left:1.7rem;">
+        <input type="checkbox" id="optIgnoreQuantity">
+        Ignore vowel quantity
+        <span style="font-size:0.88em;color:#707070;">(ω≈ο, η≈ε)</span>
+      </label>
+      <label class="option" style="margin-top:0.75rem;">
+        <input type="checkbox" id="optConsonance" checked>
+        Consonance (repeated consonant sounds)
+      </label>
+      <label class="option" style="margin-left:1.7rem;">
+        <input type="checkbox" id="optAlliterationOnly">
+        Restrict to alliteration
+        <span style="font-size:0.88em;color:#707070;">(word-initial position only)</span>
+      </label>
+      <p class="note">At least one of Assonance / Consonance must be selected.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Detection Parameters</legend>
+
+      <label class="option slider-row">
+        <span>Window size (consecutive words):</span>
+        <input type="range" id="optWindow" min="2" max="10" value="4" step="1">
+        <span id="optWindowVal" class="slider-val">4</span>
+      </label>
+
+      <label class="option slider-row">
+        <span>Minimum occurrences to report:</span>
+        <input type="range" id="optMinOcc" min="2" max="6" value="3" step="1">
+        <span id="optMinOccVal" class="slider-val">3</span>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Stop-word Exclusion</legend>
+      <label class="option">
+        <input type="checkbox" id="optStopwords" checked>
+        Exclude particles &amp; articles from consideration
+        <span style="font-size:0.88em;color:#707070;">
+          (καί, δέ, ὁ, ἡ, γάρ, μέν, ἐν, …)
+        </span>
+      </label>
+      <p class="note">Excluded words are removed before windowing; the window then
+        counts only content words.</p>
+    </fieldset>
+
+  </section>
+
+  <!-- Run -->
+  <section class="panel actions">
+    <button id="runBtn" disabled>Run Detector</button>
+    <div id="status" class="status"></div>
+  </section>
+
+  <!-- Legend -->
+  <section class="panel legend">
+    <h2>Highlight Legend</h2>
+    <ul>
+      <li><span class="legend-box assonance"></span> Violet — Assonance: repeated vowel sound</li>
+      <li><span class="legend-box consonance"></span> Blue — Consonance / Alliteration: repeated consonant sound</li>
+    </ul>
+  </section>
+
+  <!-- Output -->
+  <section class="panel output">
+    <h2>Output</h2>
+    <div class="downloads">
+      <button id="downloadHtmlBtn" disabled>Download HTML</button>
+      <button id="downloadCsvBtn"  disabled>Download CSV</button>
+      <span class="download-note">(enabled after analysis)</span>
+    </div>
+    <div id="output"></div>
+  </section>
+
+  </div><!-- /.body-content -->
+
+  <footer>
+    <p>
+      <strong>Project Demetrios</strong> · Assonance &amp; Consonance Detector
+      · Dartmouth College &amp; University of Oxford
+    </p>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
