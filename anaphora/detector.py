@@ -281,6 +281,7 @@ def read_options() -> dict:
         "detect_anaphora":        True,
         "detect_epiphora":        True,
         "detect_word_repetition": False,
+        "detect_anadiplosis":     False,
         "phrase_length":          1,
         "distance_window":        2,
         "min_occurrences":        2,
@@ -384,9 +385,52 @@ def find_groups(items, window, min_occ, kind):
     return groups
 
 
-# ---------------------------------------------------------------------------
-# HTML-building helpers
-# ---------------------------------------------------------------------------
+def find_anadiplosis(line_data, phrase_length, norm_stops, skip):
+    """
+    Anadiplosis: the END-phrase of line i matches the START-phrase of the
+    immediately following line i+1 (e.g. "...νίκην. / Νίκην δ' ἔχων...").
+
+    Unlike anaphora/epiphora/word-repetition, anadiplosis is defined by
+    strict adjacency — there is no user-configurable distance window, since
+    the figure only exists between two consecutive lines by definition.
+
+    Reuses the same _skip_stops_end / _skip_stops_start phrase-extraction
+    logic as epiphora and anaphora, so stop-word transparency and phrase
+    length settings apply identically here.
+    """
+    groups = []
+    n = len(line_data)
+
+    for i in range(n - 1):
+        toks_i  = line_data[i]["tokens"]
+        toks_i1 = line_data[i + 1]["tokens"]
+
+        end_i    = _skip_stops_end(toks_i, phrase_length, norm_stops, skip)
+        start_i1 = _skip_stops_start(toks_i1, phrase_length, norm_stops, skip)
+
+        if len(end_i) != phrase_length or len(start_i1) != phrase_length:
+            continue
+
+        key_end   = phrase_key(end_i)
+        key_start = phrase_key(start_i1)
+
+        if key_end and key_end == key_start:
+            had_stop_end   = end_i[-1][0] < len(toks_i) - 1
+            had_stop_start = start_i1[0][0] > 0
+
+            groups.append({
+                "kind": "anadiplosis",
+                "key": key_end,
+                "line_nums":    [line_data[i]["line_num"], line_data[i + 1]["line_num"]],
+                "phrases":      [[t for _, t in end_i], [t for _, t in start_i1]],
+                "had_stops":    [had_stop_end, had_stop_start],
+                "unit_indices": [i, i + 1],
+            })
+
+    return groups
+
+
+
 
 def _build_line_html(raw_line: str, toks: list, highlight_indices: dict) -> str:
     """
@@ -425,6 +469,7 @@ def detect_repetitions(text: str):
     detect_ana    = opts.get("detect_anaphora", True)
     detect_epi    = opts.get("detect_epiphora", True)
     detect_wr     = opts.get("detect_word_repetition", False)
+    detect_anad   = opts.get("detect_anadiplosis", False)
     skip          = opts.get("skip_stopwords", True)
 
     norm_stops = {normalize_word(w, opts) for w in STOP_WORDS_NFC}
@@ -503,6 +548,10 @@ def detect_repetitions(text: str):
                     key_wr = (t["line_num"], t["char_start"])
                     wr_highlight[key_wr] = "rep-wordrepeat"
 
+    # ── Anadiplosis ──────────────────────────────────────────────────────────
+    if detect_anad:
+        occurrences += find_anadiplosis(line_data, phrase_length, norm_stops, skip)
+
     # ── Build per-line highlight index maps ─────────────────────────────────
     line_highlights = {}
 
@@ -515,9 +564,14 @@ def detect_repetitions(text: str):
             lh[tok_index] = css
 
     for occ in occurrences:
-        if occ["kind"] not in ("anaphora", "epiphora"):
+        if occ["kind"] not in ("anaphora", "epiphora", "anadiplosis"):
             continue
-        css = "rep-anaphora" if occ["kind"] == "anaphora" else "rep-epiphora"
+        if occ["kind"] == "anaphora":
+            css = "rep-anaphora"
+        elif occ["kind"] == "epiphora":
+            css = "rep-epiphora"
+        else:
+            css = "rep-anadiplosis"
         for ui, phrase_toks in zip(occ["unit_indices"], occ["phrases"]):
             ld = line_data[ui]
             full_toks = ld["tokens"]
@@ -577,6 +631,7 @@ pre.source {{ white-space: pre-wrap; font-size: 18px; line-height: 1.7; }}
 .rep-anaphora   {{ background: rgba(212,160,23,0.35); border-bottom: 2px solid #b8860b; }}
 .rep-epiphora   {{ background: rgba(30,160,160,0.30); border-bottom: 2px solid #1a8a8a; }}
 .rep-wordrepeat {{ background: rgba(160,60,180,0.25); border-bottom: 2px solid #8a30a8; }}
+.rep-anadiplosis {{ background: rgba(255,160,15,0.30); border-bottom: 2px solid #cc7a00; }}
 table {{ border-collapse: collapse; width: 100%; margin-top: 1.5rem; font-size: 0.95rem; }}
 td,th {{ border: 1px solid #bbb; padding: 6px 10px; vertical-align: top; }}
 th {{ background: #f4f4f4; }}
@@ -587,7 +642,8 @@ th {{ background: #f4f4f4; }}
 <p>
   <span style="background:rgba(212,160,23,0.35);padding:2px 6px;">Gold</span> = Anaphora (A) &nbsp;
   <span style="background:rgba(30,160,160,0.30);padding:2px 6px;">Teal</span> = Epiphora (E) &nbsp;
-  <span style="background:rgba(160,60,180,0.25);padding:2px 6px;">Violet</span> = Word Repetition (W)
+  <span style="background:rgba(160,60,180,0.25);padding:2px 6px;">Violet</span> = Word Repetition (W) &nbsp;
+  <span style="background:rgba(255,160,15,0.30);padding:2px 6px;">Orange</span> = Anadiplosis (D)
 </p>
 <h2>Annotated Text</h2>
 <pre class="source">{annotated}</pre>
@@ -599,7 +655,7 @@ th {{ background: #f4f4f4; }}
 </body></html>
 """
 
-_KIND_SHORT = {"anaphora": "A", "epiphora": "E", "word_repetition": "W"}
+_KIND_SHORT = {"anaphora": "A", "epiphora": "E", "word_repetition": "W", "anadiplosis": "D"}
 
 
 def write_outputs(annotated: str, occurrences: list, html_path, csv_path):
