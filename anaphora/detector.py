@@ -385,18 +385,26 @@ def find_groups(items, window, min_occ, kind):
     return groups
 
 
-def find_anadiplosis(line_data, phrase_length, norm_stops, skip):
+def find_anadiplosis(line_data, min_phrase_length, norm_stops, skip,
+                      max_search_length=8):
     """
-    Anadiplosis: the END-phrase of line i matches the START-phrase of the
-    immediately following line i+1 (e.g. "...νίκην. / Νίκην δ' ἔχων...").
+    Anadiplosis: the phrase ending line i is repeated at the START of the
+    immediately following line i+1 (e.g. "...ἄτρομον ἦτορ ἔχῃσιν, /
+    ἄτρομον ἦτορ ἔχῃσι λίην...").
+
+    `min_phrase_length` (from the UI slider) is treated as a MINIMUM rather
+    than an exact length: the true repeated unit in real anadiplosis is
+    often longer than whatever the user happens to have the slider set to,
+    since the phrase is anchored at the line boundary rather than at a fixed
+    offset. For every adjacent line pair, this searches from the longest
+    possible common run (up to max_search_length words) down to
+    min_phrase_length, and reports the LONGEST run that matches — so a
+    genuine 3-word anadiplosis is found correctly whether the slider is set
+    to 1, 2, or 3.
 
     Unlike anaphora/epiphora/word-repetition, anadiplosis is defined by
     strict adjacency — there is no user-configurable distance window, since
     the figure only exists between two consecutive lines by definition.
-
-    Reuses the same _skip_stops_end / _skip_stops_start phrase-extraction
-    logic as epiphora and anaphora, so stop-word transparency and phrase
-    length settings apply identically here.
     """
     groups = []
     n = len(line_data)
@@ -405,29 +413,49 @@ def find_anadiplosis(line_data, phrase_length, norm_stops, skip):
         toks_i  = line_data[i]["tokens"]
         toks_i1 = line_data[i + 1]["tokens"]
 
-        end_i    = _skip_stops_end(toks_i, phrase_length, norm_stops, skip)
-        start_i1 = _skip_stops_start(toks_i1, phrase_length, norm_stops, skip)
+        # Up to max_search_length trailing content words of line i
+        tail = _skip_stops_end(toks_i, max_search_length, norm_stops, skip)
+        # Up to max_search_length leading content words of line i+1
+        head = _skip_stops_start(toks_i1, max_search_length, norm_stops, skip)
 
-        if len(end_i) != phrase_length or len(start_i1) != phrase_length:
+        if not tail or not head:
             continue
 
-        key_end   = phrase_key(end_i)
-        key_start = phrase_key(start_i1)
+        max_k = min(len(tail), len(head), max_search_length)
+        if max_k < min_phrase_length:
+            continue
 
-        if key_end and key_end == key_start:
-            had_stop_end   = end_i[-1][0] < len(toks_i) - 1
-            had_stop_start = start_i1[0][0] > 0
+        best_k = 0
+        for k in range(max_k, min_phrase_length - 1, -1):
+            tail_k = tail[-k:]
+            head_k = head[:k]
+            key_tail = phrase_key(tail_k)
+            key_head = phrase_key(head_k)
+            if key_tail and key_tail == key_head:
+                best_k = k
+                break
 
-            groups.append({
-                "kind": "anadiplosis",
-                "key": key_end,
-                "line_nums":    [line_data[i]["line_num"], line_data[i + 1]["line_num"]],
-                "phrases":      [[t for _, t in end_i], [t for _, t in start_i1]],
-                "had_stops":    [had_stop_end, had_stop_start],
-                "unit_indices": [i, i + 1],
-            })
+        if best_k == 0:
+            continue
+
+        tail_k = tail[-best_k:]
+        head_k = head[:best_k]
+        key = phrase_key(tail_k)
+
+        had_stop_end   = tail_k[-1][0] < len(toks_i) - 1
+        had_stop_start = head_k[0][0] > 0
+
+        groups.append({
+            "kind": "anadiplosis",
+            "key": key,
+            "line_nums":    [line_data[i]["line_num"], line_data[i + 1]["line_num"]],
+            "phrases":      [[t for _, t in tail_k], [t for _, t in head_k]],
+            "had_stops":    [had_stop_end, had_stop_start],
+            "unit_indices": [i, i + 1],
+        })
 
     return groups
+
 
 
 
