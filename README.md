@@ -16,8 +16,6 @@ Our tools are designed to assist in the close reading of Greek poetry by making 
 
 All tools run entirely in the browser via [Pyodide](https://pyodide.org) (a WebAssembly port of CPython). No server, no installation, and no data ever leaves the user's machine.
 
-**Developed at Dartmouth College and the University of Oxford.**
-
 ---
 
 ## Tools
