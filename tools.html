@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tools — Project Demetrios</title>
-  <meta name="description" content="The Project Demetrios analytical toolkit: open-source tools for hiatus detection, anaphora and epiphora analysis, and more." />
+  <meta name="description" content="The Project Demetrios analytical toolkit: open-source tools for hiatus detection, anaphora and epiphora analysis, assonance and consonance detection, and more." />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="tools.css" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -265,9 +265,124 @@
       <div class="meander-rule gold"></div>
     </div>
 
-    <!-- Tool III: Coming soon -->
+    <!-- Tool III: Assonance & Consonance -->
+    <article class="tool-detail reveal" id="assonance">
+      <div class="tool-detail-number">III</div>
+
+      <div class="tool-detail-content">
+        <div class="tool-detail-header">
+          <div class="tool-detail-status available">
+            <span class="status-dot"></span> New
+          </div>
+          <a href="https://projectdemetrios.dartmouth.edu/assonance/"
+             target="_blank" rel="noopener"
+             class="btn btn-primary">
+            Launch Tool →
+          </a>
+        </div>
+
+        <h2 class="tool-detail-title">Assonance &amp; Consonance Detector</h2>
+        <div class="tool-detail-greek" aria-hidden="true">Ὁμοιοήχεια</div>
+
+        <p class="tool-detail-lead">
+          Surfaces repeated vowel and consonant sounds across nearby words in
+          Ancient Greek verse, with a strict word-initial alliteration mode
+          and fully configurable window and threshold settings.
+        </p>
+
+        <div class="meander-rule" style="margin: 1.5rem 0;"></div>
+
+        <div class="tool-detail-body">
+          <div class="tool-detail-desc">
+            <h4>What it does</h4>
+            <p>
+              <strong>Assonance</strong> is the repetition of a vowel sound — a
+              single vowel or a diphthong — anywhere within nearby words, not
+              restricted to word-initial position. <strong>Consonance</strong>
+              is the analogous phenomenon for consonant sounds. A sub-option
+              restricts consonance to the strict classical definition of
+              <strong>alliteration</strong>: only the word-initial consonant
+              counts, and vowel-initial words simply do not participate.
+            </p>
+            <p>
+              Both figures are detected with the same sliding-window engine: the
+              tool examines every run of N consecutive content words and flags a
+              sound that recurs in at least a set minimum number of them. Diphthongs
+              and single vowels are treated as one phonological unit, diaeresis
+              correctly breaks a would-be diphthong in two, and an optional toggle
+              can fold ω into ο and η into ε — the only two Greek vowel pairs with
+              distinct short/long letterforms in the script.
+            </p>
+            <p>
+              Stop-words can be excluded entirely from consideration, so that
+              common particles and articles neither trigger a match nor
+              interrupt the span of content words being examined.
+            </p>
+
+            <h4>Detection modes</h4>
+            <div class="detection-modes">
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(138,105,150,0.7);"></div>
+                <div>
+                  <strong>Assonance</strong> — Violet highlight<br>
+                  <small>Repeated vowel sound, any position within the word</small>
+                </div>
+              </div>
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(38,122,186,0.7);"></div>
+                <div>
+                  <strong>Consonance / Alliteration</strong> — Blue highlight<br>
+                  <small>Repeated consonant sound, any position (or word-initial
+                  only, in strict alliteration mode)</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-detail-specs">
+            <div class="spec-block">
+              <div class="spec-label">Technology</div>
+              <div class="spec-value">Python 3 via Pyodide<br>(fully browser-based)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Input</div>
+              <div class="spec-value">UTF-8 .txt or paste</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Window size</div>
+              <div class="spec-value">2–10 words (user-set)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Minimum occurrences</div>
+              <div class="spec-value">2–6 words (user-set)</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-label">Output</div>
+              <div class="spec-value">Annotated HTML<br>CSV occurrence table</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-feature-tags">
+          <span>Assonance</span>
+          <span>Consonance</span>
+          <span>Alliteration mode</span>
+          <span>Vowel-quantity merging</span>
+          <span>Stop-word exclusion</span>
+          <span>Configurable window</span>
+          <span>CSV export</span>
+          <span>HTML export</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="tool-divider" aria-hidden="true">
+      <div class="meander-rule gold"></div>
+    </div>
+
+    <!-- Tool IV: Coming soon -->
     <article class="tool-detail tool-detail--soon reveal" id="coming-soon">
-      <div class="tool-detail-number" style="opacity:0.35;">III</div>
+      <div class="tool-detail-number" style="opacity:0.35;">IV</div>
 
       <div class="tool-detail-content">
         <div class="tool-detail-header">
@@ -370,6 +485,7 @@
       <ul>
         <li><a href="https://projectdemetrios.dartmouth.edu/hiatus/" target="_blank">Hiatus Detector</a></li>
         <li><a href="https://projectdemetrios.dartmouth.edu/anaphora/">Anaphora &amp; Epiphora</a></li>
+        <li><a href="https://projectdemetrios.dartmouth.edu/assonance/">Assonance &amp; Consonance</a></li>
       </ul>
     </div>
     <div class="footer-col">
