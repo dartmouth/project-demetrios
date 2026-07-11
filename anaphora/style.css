@@ -30,6 +30,8 @@
   --epi-line:      #1a8a8a;
   --wr-bg:         rgba(160, 60, 180, 0.22);
   --wr-line:       #8a30a8;
+  --anad-bg:       rgba(255, 160, 15, 0.30);
+  --anad-line:     #cc7a00;
 }
 
 /* ── Reset ──────────────────────────────────────────────────────────────── */
@@ -468,6 +470,11 @@ button:disabled {
   border-bottom: 2px solid var(--wr-line);
 }
 
+.legend-box.anadiplosis {
+  background: var(--anad-bg);
+  border-bottom: 2px solid var(--anad-line);
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    OUTPUT
    ════════════════════════════════════════════════════════════════════════════ */
@@ -535,6 +542,11 @@ pre.source {
 .rep-wordrepeat {
   background: var(--wr-bg);
   border-bottom: 2px solid var(--wr-line);
+}
+
+.rep-anadiplosis {
+  background: var(--anad-bg);
+  border-bottom: 2px solid var(--anad-line);
 }
 
 /* ── Occurrence table ───────────────────────────────────────────────────── */
