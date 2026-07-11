@@ -61,6 +61,12 @@
         <dt>Symploce</dt>
         <dd>A line may be highlighted for both figures simultaneously (gold start,
             teal end).</dd>
+        <dt>Anadiplosis</dt>
+        <dd>Repetition of the phrase ending one line at the very <em>beginning of
+            the next</em> line (e.g. Homer's <em>...Ἄϊδι προΐαψεν, / ἡρώων, αὐτοὺς
+            δὲ...</em>). Unlike the other three figures, anadiplosis is defined by
+            strict line-to-line adjacency and does not use the distance window
+            setting. Highlighted in orange (D).</dd>
       </dl>
 
       <h3>Distance window</h3>
@@ -129,6 +135,10 @@
       <label class="option">
         <input type="checkbox" id="optWordRepetition">
         Word Repetition (clause-initial repetition across punctuation)
+      </label>
+      <label class="option">
+        <input type="checkbox" id="optAnadiplosis">
+        Anadiplosis (end of one line repeated at the start of the next)
       </label>
       <p class="note">At least one must be selected.</p>
     </fieldset>
@@ -208,6 +218,7 @@
       <li><span class="legend-box anaphora"></span> Gold — Anaphora (A): line-initial repetition</li>
       <li><span class="legend-box epiphora"></span> Teal — Epiphora (E): line-final repetition</li>
       <li><span class="legend-box wordrepeat"></span> Violet — Word Repetition (W): clause-initial repetition across punctuation</li>
+      <li><span class="legend-box anadiplosis"></span> Orange — Anadiplosis (D): end of one line repeated at start of next</li>
     </ul>
   </section>
 
@@ -228,6 +239,7 @@
   <footer>
     <p>
       <strong>Project Demetrios</strong> · Anaphora &amp; Epiphora Detector
+      · Dartmouth College &amp; University of Oxford
     </p>
   </footer>
 
