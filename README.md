@@ -10,7 +10,7 @@
 
 ## About
 
-Project Demetrios is a suite of browser-based analytical tools for classical philologists working with Ancient Greek verse. The project takes its name from **Demetrius of Phaleron** (c. 350–280 BCE) — Athenian orator, Peripatetic philosopher, and first director of the Library of Alexandria, probable author of *Περὶ Ἑρμηνείας* (*On Style*), the earliest surviving systematic treatise on Greek rhetorical figures.
+Project Demetrios is a suite of browser-based analytical tools for classical philologists working with Ancient Greek verse. The project takes its name from **Demetrius**, probable author of *Περὶ Ἑρμηνείας* (*On Style*), the earliest surviving systematic treatise on Greek rhetorical figures.
 
 Our tools are designed to assist in the close reading of Greek poetry by making visible patterns that lie beneath the threshold of unaided attention over extended texts. They do not replace philological judgement — they augment it. Every normalisation step is opt-in, fully documented, and reversible.
 
