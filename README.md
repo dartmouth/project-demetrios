@@ -39,16 +39,36 @@ Detects and highlights every instance of vowel hiatus in an uploaded or pasted A
 
 Detects rhetorical repetition at verse-line boundaries and across clause-delimiting punctuation in Ancient Greek verse.
 
-**Three detection modes:**
+**Four detection modes:**
 - **Anaphora** — repetition of the same phrase at the *start* of consecutive verse lines (highlighted in gold)
 - **Epiphora** — repetition at the *end* of consecutive verse lines (highlighted in teal)
 - **Word Repetition** — clause-initial repetition across punctuation boundaries (`.`, `·`, `;`, `,`), capturing figures like Apollonius's *πολλὰ δ᾽* recurring across periods (highlighted in violet)
+- **Anadiplosis** — the phrase ending one line repeated at the start of the next, detected by strict line-to-line adjacency rather than the configurable distance window (highlighted in orange)
 
 **Features:**
 - User-configurable phrase length (1–5 words) and distance window (2–10 lines)
 - Stop-word transparency: particles, articles, and prepositions (καί, δέ, ὁ, γάρ, …) are skipped when determining the comparison phrase, but flagged in output
 - Highlight extension: once a match is found, the full common prefix/suffix is highlighted rather than only the minimum matching phrase
 - Normalisation pipeline: accent stripping, breathing removal, iota subscript, elision handling, nu-movable — each step independently toggleable
+- Outputs: annotated HTML, CSV occurrence table
+
+---
+
+### III — Assonance & Consonance Detector
+**Live:** [projectdemetrios.dartmouth.edu/assonance](https://projectdemetrios.dartmouth.edu/assonance)
+
+Detects repeated vowel and consonant sounds across nearby words using a sliding window over the text, independent of line breaks (sound effects are heard across enjambment).
+
+**Two detection modes:**
+- **Assonance** — repetition of a vowel sound (a single vowel or a diphthong) anywhere within nearby words, not restricted to word-initial position (highlighted in violet)
+- **Consonance** — repetition of a consonant sound anywhere within nearby words; a sub-option restricts this to the strict classical definition of **alliteration** (word-initial consonant only — vowel-initial words do not participate) (highlighted in blue)
+
+**Features:**
+- User-configurable window size (2–10 consecutive content words) and minimum occurrence threshold (2–6 words)
+- Diphthongs and single vowels treated as one phonological unit; diaeresis correctly breaks a would-be diphthong in two; iota subscript preserved as a distinguishing feature
+- Optional vowel-quantity folding (ω≈ο, η≈ε) — the only two Greek vowel pairs with distinct short/long letterforms in the script
+- Final sigma (ς) and medial sigma (σ) normalised to the same consonant key
+- Stop-word exclusion removes function words entirely before windowing, so they can neither trigger nor interrupt a match
 - Outputs: annotated HTML, CSV occurrence table
 
 ---
@@ -85,7 +105,13 @@ project-demetrios/
 │   ├── app.js                  # Pyodide orchestration + UI logic
 │   └── detector.py             # Core detection logic (runs via Pyodide)
 │
-└── anaphora/                   # Tool II
+├── anaphora/                   # Tool II
+│   ├── index.html
+│   ├── style.css
+│   ├── app.js
+│   └── detector.py
+│
+└── assonance/                  # Tool III
     ├── index.html
     ├── style.css
     ├── app.js
