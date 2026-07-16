@@ -79,9 +79,9 @@ header::before {
   pointer-events: none;
 }
 
-/* Ghost Greek letter — Ω for resonance/echo, distinct from Η (hiatus) and Α (anaphora) */
+/* Ghost Greek letter — Π for resonance/echo, distinct from Η (hiatus) and Α (anaphora) */
 header::after {
-  content: 'Ω';
+  content: 'Π';
   position: absolute;
   right: 2rem;
   top: 50%;
