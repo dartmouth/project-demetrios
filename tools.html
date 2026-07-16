@@ -92,6 +92,31 @@
               and a variety of other edge cases and scenarios.
             </p>
 
+            <h4>Detection modes</h4>
+            <div class="detection-modes">
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(200,60,60,0.7);"></div>
+                <div>
+                  <strong>Word-internal (I)</strong> — Red highlight<br>
+                  <small>Hiatus within a single word</small>
+                </div>
+              </div>
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(40,160,80,0.7);"></div>
+                <div>
+                  <strong>Inter-word (B)</strong> — Green highlight<br>
+                  <small>Hiatus across a word boundary</small>
+                </div>
+              </div>
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(38,122,186,0.7);"></div>
+                <div>
+                  <strong>Across-verse (V)</strong> — Blue highlight<br>
+                  <small>Hiatus from the end of one line to the start of the next</small>
+                </div>
+              </div>
+            </div>
+
             <h4>How to use it</h4>
             <ol>
               <li>Upload a UTF-8 encoded <code>.txt</code> file of Greek text.</li>
@@ -164,9 +189,10 @@
         <div class="tool-detail-greek" aria-hidden="true">Ἀναφορά</div>
 
         <p class="tool-detail-lead">
-          Detects and highlights rhetorical repetition (anaphora, epiphora, and
-          word repetition across clause boundaries) in Ancient Greek verse, with
-          fully configurable phrase length, distance windows, and normalisation options.
+          Detects and highlights rhetorical repetition (anaphora, epiphora,
+          word repetition across clause boundaries, and anadiplosis) in
+          Ancient Greek verse, with fully configurable phrase length,
+          distance windows, and normalisation options.
         </p>
 
         <div class="meander-rule" style="margin: 1.5rem 0;"></div>
@@ -187,6 +213,16 @@
               repetition across clause boundaries delimited by punctuation (. · ; ,),
               capturing figures that
               recur across periods within and between lines.
+            </p>
+            <p>
+              A fourth mode, <strong>anadiplosis</strong>, detects the phrase ending
+              one line repeated at the very beginning of the next. Because this
+              figure is defined by strict line-to-line adjacency rather than
+              proximity within a window, it does not use the distance-window
+              setting; the phrase-length slider instead acts as a minimum, and the
+              tool automatically extends the highlight to the full length of the
+              repeated run, so a genuine three-word repetition is still found
+              correctly even if the slider is set to one.
             </p>
             <p>
               Stop-words (particles, articles, prepositions) are handled with
@@ -220,6 +256,13 @@
                   <small>Clause-initial repetition across punctuation boundaries</small>
                 </div>
               </div>
+              <div class="detection-mode">
+                <div class="mode-color" style="background:rgba(255,160,15,0.7);"></div>
+                <div>
+                  <strong>Anadiplosis</strong> — Orange highlight<br>
+                  <small>End of one line repeated at the start of the next (strict adjacency)</small>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -251,6 +294,7 @@
           <span>Anaphora</span>
           <span>Epiphora</span>
           <span>Word repetition</span>
+          <span>Anadiplosis</span>
           <span>Stop-word transparency</span>
           <span>Elision handling</span>
           <span>Nu-movable</span>
